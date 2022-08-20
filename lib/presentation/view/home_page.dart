@@ -3,7 +3,7 @@ import 'package:clean_architecture/data/data_source/local_data_source.dart';
 import 'package:clean_architecture/data/pokemon_repository.dart';
 import 'package:clean_architecture/domain/model/pokemon.dart';
 import 'package:clean_architecture/domain/pokemon_service.dart';
-import 'package:clean_architecture/view/store/pokemon_store.dart';
+import 'package:clean_architecture/presentation/store/pokemon_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
