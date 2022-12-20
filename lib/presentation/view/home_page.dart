@@ -1,8 +1,7 @@
+import 'package:clean_architecture/domain/bloc/pokemon_bloc.dart';
 import 'package:clean_architecture/domain/model/pokemon.dart';
-import 'package:clean_architecture/domain/service/pokemon_service.dart';
-import 'package:clean_architecture/presentation/store/pokemon_store.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,19 +12,22 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Pokémon'),
       ),
-      body: ChangeNotifierProvider(
-        create: (context) => PokemonStore(context.read<PokemonService>()),
-        builder: (context, child) {
-          final store = context.watch<PokemonStore>();
-          return ListView.separated(
-            itemCount: store.pokemons.length,
-            padding: const EdgeInsets.all(16),
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 8,
-            ),
-            itemBuilder: (context, index) => _ListItem(
-              pokemon: store.pokemons.elementAt(index),
-            ),
+      body: BlocBuilder<PokemonListBloc, PokemonState>(
+        builder: (context, state) {
+          if (state is PokemonListLoadedState) {
+            return ListView.separated(
+              itemCount: state.pokemons.length,
+              padding: const EdgeInsets.all(16),
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 8,
+              ),
+              itemBuilder: (context, index) => _ListItem(
+                pokemon: state.pokemons.elementAt(index),
+              ),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
           );
         },
       ),
