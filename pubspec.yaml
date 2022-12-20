@@ -23,7 +23,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # Used to provide the dependencies and rebuild on state changes.
   provider: ^6.0.3
+
+  # To make simple API calls
   http: ^0.13.5
 
 dev_dependencies:

@@ -1,8 +1,5 @@
-import 'package:clean_architecture/data/api/remote_data_source.dart';
-import 'package:clean_architecture/data/data_source/local_data_source.dart';
-import 'package:clean_architecture/data/pokemon_repository.dart';
 import 'package:clean_architecture/domain/model/pokemon.dart';
-import 'package:clean_architecture/domain/pokemon_service.dart';
+import 'package:clean_architecture/domain/service/pokemon_service.dart';
 import 'package:clean_architecture/presentation/store/pokemon_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,14 +14,7 @@ class HomePage extends StatelessWidget {
         title: const Text('Pokémon'),
       ),
       body: ChangeNotifierProvider(
-        create: (context) => PokemonStore(
-          PokemonService(
-            PokemonRepositoryImpl(
-              PokemonLocalDataSource(),
-              PokemonRemoteDataSource(),
-            ),
-          ),
-        ),
+        create: (context) => PokemonStore(context.read<PokemonService>()),
         builder: (context, child) {
           final store = context.watch<PokemonStore>();
           return ListView.separated(

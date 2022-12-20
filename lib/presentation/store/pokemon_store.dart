@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:clean_architecture/domain/model/pokemon.dart';
-import 'package:clean_architecture/domain/pokemon_service.dart';
+import 'package:clean_architecture/domain/service/pokemon_service.dart';
 import 'package:flutter/foundation.dart';
 
 class PokemonStore extends ChangeNotifier {
