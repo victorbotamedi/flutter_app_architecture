@@ -1,7 +1,7 @@
 import 'package:clean_architecture/data/api/remote_data_source.dart';
 import 'package:clean_architecture/data/data_source/local_data_source.dart';
 import 'package:clean_architecture/data/pokemon_repository.dart';
-import 'package:clean_architecture/domain/bloc/pokemon_bloc.dart';
+import 'package:clean_architecture/domain/cubit/pokemon_cubit.dart';
 import 'package:clean_architecture/domain/pokemon_repository.dart';
 import 'package:clean_architecture/presentation/view/home_page.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
         PokemonRemoteDataSource(),
       ),
       child: BlocProvider(
-        create: (context) => PokemonListBloc(
+        create: (context) => PokemonListCubit(
           context.read<PokemonRepository>(),
-        )..add(PokemonListRefreshed()),
+        )..refreshList(),
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(

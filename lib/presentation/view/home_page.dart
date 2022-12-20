@@ -1,4 +1,4 @@
-import 'package:clean_architecture/domain/bloc/pokemon_bloc.dart';
+import 'package:clean_architecture/domain/cubit/pokemon_cubit.dart';
 import 'package:clean_architecture/domain/model/pokemon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Pokémon'),
       ),
-      body: BlocBuilder<PokemonListBloc, PokemonState>(
+      body: BlocBuilder<PokemonListCubit, PokemonState>(
         builder: (context, state) {
           if (state is PokemonListLoadedState) {
             return ListView.separated(

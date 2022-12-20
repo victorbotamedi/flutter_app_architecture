@@ -3,11 +3,6 @@ import 'package:clean_architecture/domain/pokemon_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Pokemon list events.
-abstract class PokemonListEvent {}
-
-class PokemonListRefreshed extends PokemonListEvent {}
-
 /// Pokemon list states.
 abstract class PokemonState extends Equatable {
   const PokemonState();
@@ -27,15 +22,14 @@ class PokemonListLoadedState extends PokemonState {
   List<Object?> get props => [pokemons];
 }
 
-class PokemonListBloc extends Bloc<PokemonListEvent, PokemonState> {
+class PokemonListCubit extends Cubit<PokemonState> {
   final PokemonRepository _repository;
 
-  PokemonListBloc(this._repository) : super(PokemonLoadingState()) {
-    on<PokemonListRefreshed>((event, emit) async {
-      await emit.forEach(_repository.fetch(),
-          onData: (Iterable<Pokemon> pokemons) {
-        return PokemonListLoadedState(pokemons);
-      });
+  PokemonListCubit(this._repository) : super(PokemonLoadingState());
+
+  void refreshList() {
+    _repository.fetch().forEach((pokemons) {
+      emit(PokemonListLoadedState(pokemons));
     });
   }
 }
