@@ -27,8 +27,11 @@ dependencies:
   # Provides dependencies.
   provider: ^6.0.3
 
-  # State management
+  # State management.
   flutter_bloc: ^8.1.1
+
+  # Simplifies object comparison.
+  equatable: ^2.0.5
 
   # To make simple API calls
   http: ^0.13.5
