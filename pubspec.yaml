@@ -24,8 +24,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Used to provide the dependencies and rebuild on state changes.
+  # Provides dependencies.
   provider: ^6.0.3
+
+  # State management
+  flutter_bloc: ^8.1.1
 
   # To make simple API calls
   http: ^0.13.5
